@@ -1,4 +1,4 @@
-let stitches = 100;
+let stitches = 200;
 let rows = 50;
 let color1 = "#ff0000";
 let color2 = "#0000ff";
