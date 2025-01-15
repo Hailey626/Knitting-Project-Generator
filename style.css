@@ -1,89 +1,96 @@
-/* General reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Body style */
+/* General Body Styles */
 body {
   font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 20px;
   background-color: #f9f9f9;
   color: #333;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  height: 100vh;
-  padding: 20px;
-  margin: 0;
 }
 
-/* Header style */
+/* Header Styles */
 h1 {
-  font-size: 24px;
   margin-bottom: 20px;
-  text-align: center;
+  color: #444;
 }
 
-/* Controls section */
+/* Controls Section */
 .controls {
   margin-bottom: 20px;
-  text-align: center;
+  width: 100%;
+  max-width: 400px;
 }
 
 .controls label {
-  font-size: 16px;
-  margin: 10px 0;
   display: block;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 .controls input[type="range"] {
-  width: 80%;
-  max-width: 400px;
-  margin: 5px 0;
-}
-
-.controls span {
-  font-size: 14px;
-  display: block;
+  width: 100%;
   margin-top: 5px;
 }
 
+.controls span {
+  font-weight: bold;
+  margin-left: 10px;
+  color: #555;
+}
+
+/* Row Colors Section */
 #row-colors {
   max-height: 300px;
   overflow-y: auto;
-  padding: 10px;
   border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
   background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 450px;
-  margin-top: 20px;
+  max-width: 400px;
 }
 
 #row-colors label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
 #row-colors input[type="color"] {
   margin-left: 10px;
-  vertical-align: middle;
+  cursor: pointer;
+  border: none;
+  width: 40px;
+  height: 30px;
+  padding: 0;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Canvas container */
+/* Canvas Section */
 #canvas-container {
   margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
 }
 
-/* Canvas style */
 canvas {
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .controls, #row-colors {
+    max-width: 100%;
+  }
+
+  canvas {
+    width: 100%;
+    height: auto;
+  }
 }
