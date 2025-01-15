@@ -1,32 +1,89 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
+/* General reset */
+* {
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  box-sizing: border-box;
 }
 
-h1 {
-  margin-top: 20px;
+/* Body style */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
   color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  padding: 20px;
+  margin: 0;
 }
 
+/* Header style */
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Controls section */
 .controls {
-  margin: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.controls label {
+  font-size: 16px;
+  margin: 10px 0;
+  display: block;
+}
+
+.controls input[type="range"] {
+  width: 80%;
+  max-width: 400px;
+  margin: 5px 0;
+}
+
+.controls span {
+  font-size: 14px;
+  display: block;
+  margin-top: 5px;
+}
+
+#row-colors {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  width: 100%;
+  max-width: 450px;
+  margin-top: 20px;
+}
+
+#row-colors label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+#row-colors input[type="color"] {
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/* Canvas container */
+#canvas-container {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
 }
 
-label {
-  margin-right: 5px;
-}
-
-#canvas-container {
-  margin: 20px auto;
-  width: 90%;
-  max-width: 800px;
+/* Canvas style */
+canvas {
   border: 2px solid #ccc;
-  background: #fff;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
