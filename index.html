@@ -3,41 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Circular Knitting Machine Pattern Designer</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .controls {
-      margin-bottom: 20px;
-    }
-    .controls label {
-      display: block;
-      margin-top: 10px;
-    }
-    #row-colors {
-      max-height: 300px;
-      overflow-y: auto;
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 20px;
-      width: 100%;
-      max-width: 400px;
-    }
-    canvas {
-      border: 1px solid #ccc;
-      display: block;
-      margin-top: 20px;
-    }
-  </style>
+  <title>Circular Knitting Pattern Designer</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Circular Knitting Machine Pattern Designer</h1>
+  <h1>Circular Knitting Pattern Designer</h1>
   <div class="controls">
     <label for="stitches">Stitches (up to 48):</label>
     <input type="range" id="stitches" min="10" max="48" value="24">
@@ -49,7 +19,7 @@
   </div>
 
   <div id="row-colors">
-    <!-- Color pickers for each row will be dynamically added here -->
+    <!-- Color pickers for rows will be dynamically added here -->
   </div>
 
   <div id="canvas-container">
