@@ -1,15 +1,61 @@
-<div class="controls">
-  <label for="stitches">Stitches (up to 48):</label>
-  <input type="range" id="stitches" min="10" max="48" value="24">
-  <span id="stitches-value">24</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circular Knitting Machine Pattern Designer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .controls {
+      margin-bottom: 20px;
+    }
+    .controls label {
+      display: block;
+      margin-top: 10px;
+    }
+    #row-colors {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 400px;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      display: block;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Circular Knitting Machine Pattern Designer</h1>
+  <div class="controls">
+    <label for="stitches">Stitches (up to 48):</label>
+    <input type="range" id="stitches" min="10" max="48" value="24">
+    <span id="stitches-value">24</span>
 
-  <label for="rows">Rows (up to 500):</label>
-  <input type="range" id="rows" min="10" max="500" value="10">
-  <span id="rows-value">10</span>
-</div>
+    <label for="rows">Rows (up to 300):</label>
+    <input type="range" id="rows" min="10" max="300" value="10">
+    <span id="rows-value">10</span>
+  </div>
 
-<div id="row-colors">
-  <!-- Color pickers for each row will be dynamically added here -->
-</div>
+  <div id="row-colors">
+    <!-- Color pickers for each row will be dynamically added here -->
+  </div>
 
-<div id="canvas-container"></div>
+  <div id="canvas-container">
+    <canvas id="patternCanvas" width="800" height="800"></canvas>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
