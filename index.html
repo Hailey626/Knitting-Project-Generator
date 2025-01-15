@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knitting Pattern Generator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <h1>Circular Knitting Machine Hat Pattern</h1>
+  <div class="controls">
+    <label for="stitches">Stitches:</label>
+    <input type="range" id="stitches" min="10" max="200" value="100">
+    <span id="stitches-value">100</span>
+
+    <label for="rows">Rows:</label>
+    <input type="range" id="rows" min="10" max="100" value="50">
+    <span id="rows-value">50</span>
+
+    <label for="color1">Color 1:</label>
+    <input type="color" id="color1" value="#ff0000">
+
+    <label for="color2">Color 2:</label>
+    <input type="color" id="color2" value="#0000ff">
+  </div>
+  <div id="canvas-container"></div>
+</body>
+</html>
