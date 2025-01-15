@@ -1,81 +1,92 @@
-let stitches = 24; // Default stitches
-let rows = 10; // Default rows
-let rowColors = []; // Array to store colors for each row
+const stitchesInput = document.getElementById('stitches');
+const rowsInput = document.getElementById('rows');
+const stitchesValue = document.getElementById('stitches-value');
+const rowsValue = document.getElementById('rows-value');
+const rowColorsContainer = document.getElementById('row-colors');
+const canvas = document.getElementById('patternCanvas');
+const ctx = canvas.getContext('2d');
 
-function setup() {
-  // Create the canvas dynamically
-  const canvasContainer = document.getElementById('canvas-container');
-  const canvas = createCanvas(800, 400);
-  canvas.parent(canvasContainer);
-  noLoop(); // Prevent automatic redrawing
+let stitches = parseInt(stitchesInput.value);
+let rows = parseInt(rowsInput.value);
+let rowColors = [];
 
-  // Initialize color pickers
-  initializeRowColors();
-}
-
-function draw() {
-  background(255);
-
-  const stitchWidth = width / stitches;
-  const rowHeight = height / rows;
-
-  for (let row = 0; row < rows; row++) {
-    for (let stitch = 0; stitch < stitches; stitch++) {
-      const x = stitch * stitchWidth;
-      const y = row * rowHeight;
-
-      // Use the assigned color for this row
-      const color = rowColors[row] || "#ffffff"; // Default to white if no color is assigned
-      fill(color);
-      rect(x, y, stitchWidth, rowHeight);
-    }
-  }
-}
-
-// Dynamically create color pickers for each row
+// Initialize default colors
 function initializeRowColors() {
-  const rowColorsContainer = document.getElementById('row-colors');
-  rowColorsContainer.innerHTML = ""; // Clear existing color pickers
+  rowColorsContainer.innerHTML = ""; // Clear existing colors
+  rowColors = Array.from({ length: rows }, () => getRandomColor());
 
-  for (let i = 0; i < rows; i++) {
+  rowColors.forEach((color, index) => {
+    const label = document.createElement('label');
+    label.textContent = `Row ${index + 1}: `;
+
     const colorInput = document.createElement('input');
     colorInput.type = "color";
-    colorInput.value = getRandomColor(); // Assign a random default color
-    colorInput.dataset.row = i;
+    colorInput.value = color;
+    colorInput.dataset.row = index;
 
-    // Update color array when the user selects a color
     colorInput.addEventListener('input', (e) => {
-      const row = parseInt(e.target.dataset.row);
-      rowColors[row] = e.target.value;
-      redraw();
+      rowColors[parseInt(e.target.dataset.row)] = e.target.value;
+      drawPattern();
     });
 
-    const label = document.createElement('label');
-    label.textContent = `Row ${i + 1}:`;
     label.appendChild(colorInput);
-
     rowColorsContainer.appendChild(label);
-  }
-
-  // Initialize rowColors array with default colors
-  rowColors = Array.from({ length: rows }, () => getRandomColor());
+  });
 }
 
-// Generate a random color (optional, for initial assignment)
+// Generate a random color
 function getRandomColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
 }
 
+// Draw the circular knitting pattern
+function drawPattern() {
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const radius = Math.min(centerX, centerY) - 10;
+  const rowHeight = radius / rows;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let row = 0; row < rows; row++) {
+    const startRadius = row * rowHeight;
+    const endRadius = startRadius + rowHeight;
+    const angleStep = (2 * Math.PI) / stitches;
+
+    ctx.beginPath();
+    for (let stitch = 0; stitch <= stitches; stitch++) {
+      const angle = stitch * angleStep;
+      const x = centerX + endRadius * Math.cos(angle);
+      const y = centerY + endRadius * Math.sin(angle);
+
+      if (stitch === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    }
+    ctx.closePath();
+
+    // Fill the row with the assigned color
+    ctx.fillStyle = rowColors[row] || "#ffffff";
+    ctx.fill();
+  }
+}
+
 // Update values and redraw when sliders change
-document.getElementById('stitches').addEventListener('input', (e) => {
+stitchesInput.addEventListener('input', (e) => {
   stitches = parseInt(e.target.value);
-  document.getElementById('stitches-value').textContent = stitches;
-  redraw();
+  stitchesValue.textContent = stitches;
+  drawPattern();
 });
 
-document.getElementById('rows').addEventListener('input', (e) => {
+rowsInput.addEventListener('input', (e) => {
   rows = parseInt(e.target.value);
-  document.getElementById('rows-value').textContent = rows;
-  initializeRowColors(); // Recreate color pickers
-  redraw();
+  rowsValue.textContent = rows;
+  initializeRowColors(); // Recreate color pickers for new row count
+  drawPattern();
 });
+
+// Initialize the application
+initializeRowColors();
+drawPattern();
