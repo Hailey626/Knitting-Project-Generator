@@ -1,5 +1,5 @@
-let stitches = 200;
-let rows = 50;
+let stitches = 48;
+let rows = 200;
 let color1 = "#ff0000";
 let color2 = "#0000ff";
 
