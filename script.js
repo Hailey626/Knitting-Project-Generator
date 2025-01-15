@@ -1,3 +1,4 @@
+// Elements
 const stitchesInput = document.getElementById('stitches');
 const rowsInput = document.getElementById('rows');
 const stitchesValue = document.getElementById('stitches-value');
@@ -10,9 +11,9 @@ let stitches = parseInt(stitchesInput.value);
 let rows = parseInt(rowsInput.value);
 let rowColors = [];
 
-// Initialize default colors
+// Initialize row colors and UI
 function initializeRowColors() {
-  rowColorsContainer.innerHTML = ""; // Clear existing colors
+  rowColorsContainer.innerHTML = ""; // Clear previous color pickers
   rowColors = Array.from({ length: rows }, () => getRandomColor());
 
   rowColors.forEach((color, index) => {
@@ -24,8 +25,10 @@ function initializeRowColors() {
     colorInput.value = color;
     colorInput.dataset.row = index;
 
+    // Update color on input
     colorInput.addEventListener('input', (e) => {
-      rowColors[parseInt(e.target.dataset.row)] = e.target.value;
+      const row = parseInt(e.target.dataset.row);
+      rowColors[row] = e.target.value;
       drawPattern();
     });
 
@@ -34,7 +37,7 @@ function initializeRowColors() {
   });
 }
 
-// Generate a random color
+// Generate random color for rows
 function getRandomColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
 }
@@ -67,13 +70,13 @@ function drawPattern() {
     }
     ctx.closePath();
 
-    // Fill the row with the assigned color
-    ctx.fillStyle = rowColors[row] || "#ffffff";
+    // Fill with row color
+    ctx.fillStyle = rowColors[row];
     ctx.fill();
   }
 }
 
-// Update values and redraw when sliders change
+// Event listeners
 stitchesInput.addEventListener('input', (e) => {
   stitches = parseInt(e.target.value);
   stitchesValue.textContent = stitches;
@@ -83,10 +86,10 @@ stitchesInput.addEventListener('input', (e) => {
 rowsInput.addEventListener('input', (e) => {
   rows = parseInt(e.target.value);
   rowsValue.textContent = rows;
-  initializeRowColors(); // Recreate color pickers for new row count
+  initializeRowColors(); // Recreate color pickers for new rows
   drawPattern();
 });
 
-// Initialize the application
+// Initialize tool
 initializeRowColors();
 drawPattern();
